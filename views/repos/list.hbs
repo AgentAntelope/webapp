@@ -68,11 +68,13 @@ function next()
 	$("#next-repo").text('');
 	$("#next-repo").attr("href", '');
 	$("#next-repo-owner").text('');
+	$("#word").text('');
 	$.getJSON("/ajax/repos/next", function(data)
 	{
 		$("#next-repo").text(data.name);
 		$("#next-repo").attr("href", data.file);
 		$("#next-repo-owner").text(data.owner);
+		$('#word').text(data.matched);
 		$("#done")[0].onclick = (function()
 		{
 			//Done
@@ -114,7 +116,8 @@ $(document).ready(function()
 <body>
 <center><img src="http://ethicalcode.github.io/images/eclogo1.png" class="logo"></center>
 <div class="display-area">
-The next repository is <a id="next-repo">(loading...)</a>, by <span id="next-repo-owner">(loading...)</span>.
+<p>The next repository is <a id="next-repo">(loading...)</a>, by <span id="next-repo-owner">(loading...)</span>.</p>
+<p>Flagged word was '<span id="word"></span>'</p>
 </div>
 <div class="button-area">
 <button type="button" class="btn btn-success" id="done">This Is Done</button>
